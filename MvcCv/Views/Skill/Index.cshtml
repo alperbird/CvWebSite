@@ -1,0 +1,95 @@
+﻿@using MvcCv.Models.Entity
+@model List<tbl_Skills>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{ string renk = ""; }
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Skill List</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <a href="/Skill/AddSkill/" class="btn btn-outline-primary">Add New Skill</a>
+                                <br />
+                                <br />
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">ID</th>
+                                            <th>Skill</th>
+                                            <th>Degree</th>
+                                            <th style="width: 40px">Percent</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var x in Model)
+                                        {
+                                            if (x.Percent >= 0 && x.Percent <= 50)
+                                            {
+                                                renk = "progress-bar bg-danger";
+                                            }
+                                            if (x.Percent <= 75 && x.Percent > 50)
+                                            {
+                                                renk = "progress-bar bg-warning";
+                                            }
+                                            if (x.Percent <= 100 && x.Percent > 75)
+                                            {
+                                                renk = "progress-bar bg-success";
+                                            }
+                                            <tr>
+                                                <td>@x.Id</td>
+                                                <td>@x.Skill</td>
+                                                <td>
+                                                    <div class="progress progress-xs">
+                                                        <div class="@renk" style="width: @x.Percent%"></div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="@renk">@x.Percent %</span></td>
+                                                <td>
+                                                    <a class="btn btn-outline-warning btn-sm" href="/Skill/GetSkill/@x.Id">
+                                                        <i class="fas fa-pencil-alt"></i> Update</a>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-outline-danger btn-sm" href="/Skill/DeleteSkill/@x.Id">
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                </td>
+</tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+</body>
+</html>

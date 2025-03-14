@@ -1,0 +1,29 @@
+﻿@model MvcCv.Models.Entity.tbl_Skills
+
+@{
+    ViewBag.Title = "GetSkill";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h4>Update Skill Page</h4>
+<br />
+<form method="post">
+    @Html.Label("Deneyim ID")
+    @Html.TextBoxFor(x => x.Id, new { @class = "form-control readonly-cursor", @readonly = "readonly" })
+    <br />
+    @Html.Label("Title")
+    @Html.TextBoxFor(x => x.Skill, new { @class = "form-control" })
+    <br />
+    @Html.Label("Subtitle")
+    @Html.TextBoxFor(x => x.Percent, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>
+
+<style>
+    .readonly-cursor {
+        cursor: not-allowed;
+        background-color: #e9ecef; /* Bootstrap readonly görünümü */
+    }
+</style>
