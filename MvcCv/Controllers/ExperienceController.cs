@@ -13,6 +13,7 @@ namespace MvcCv.Controllers
         // GET: Experience
         GenericRepository<tbl_Experiences> repo = new GenericRepository<tbl_Experiences>();
 
+        
         public ActionResult Index()
         {
             var values = repo.List();

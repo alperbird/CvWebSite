@@ -40,6 +40,7 @@ warning 6002: The table/view 'UdemyCv.dbo.tbl_About' does not have a primary key
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Date" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="tbl_Contact">
           <Key>
@@ -89,6 +90,15 @@ warning 6002: The table/view 'UdemyCv.dbo.tbl_About' does not have a primary key
           <Property Name="Skill" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Percent" Type="tinyint" />
         </EntityType>
+        <EntityType Name="tbl_SocialMedia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Link" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
         <EntityContainer Name="UdemyCvModelStoreContainer">
           <EntitySet Name="tbl_Admin" EntityType="Self.tbl_Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Certificate" EntityType="Self.tbl_Certificate" Schema="dbo" store:Type="Tables" />
@@ -97,6 +107,7 @@ warning 6002: The table/view 'UdemyCv.dbo.tbl_About' does not have a primary key
           <EntitySet Name="tbl_Experiences" EntityType="Self.tbl_Experiences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Hobbies" EntityType="Self.tbl_Hobbies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Skills" EntityType="Self.tbl_Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SocialMedia" EntityType="Self.tbl_SocialMedia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_About" EntityType="Self.tbl_About" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [tbl_About].[Id] AS [Id], 
@@ -128,6 +139,7 @@ warning 6002: The table/view 'UdemyCv.dbo.tbl_About' does not have a primary key
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tbl_Contact">
           <Key>
@@ -205,7 +217,17 @@ warning 6002: The table/view 'UdemyCv.dbo.tbl_About' does not have a primary key
           <EntitySet Name="tbl_Hobbies" EntityType="Self.tbl_Hobbies" />
           <EntitySet Name="tbl_Skills" EntityType="Self.tbl_Skills" />
           <EntitySet Name="tbl_About" EntityType="Self.tbl_About" />
+          <EntitySet Name="tbl_SocialMedia" EntityType="UdemyCvModel.tbl_SocialMedia" />
         </EntityContainer>
+        <EntityType Name="tbl_SocialMedia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Link" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -224,6 +246,7 @@ warning 6002: The table/view 'UdemyCv.dbo.tbl_About' does not have a primary key
           <EntitySetMapping Name="tbl_Certificate">
             <EntityTypeMapping TypeName="UdemyCvModel.tbl_Certificate">
               <MappingFragment StoreEntitySet="tbl_Certificate">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
@@ -293,6 +316,16 @@ warning 6002: The table/view 'UdemyCv.dbo.tbl_About' does not have a primary key
                 <ScalarProperty Name="Mail" ColumnName="Mail" />
                 <ScalarProperty Name="About" ColumnName="About" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SocialMedia">
+            <EntityTypeMapping TypeName="UdemyCvModel.tbl_SocialMedia">
+              <MappingFragment StoreEntitySet="tbl_SocialMedia">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
