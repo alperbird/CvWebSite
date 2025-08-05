@@ -1,0 +1,11 @@
+﻿@using MvcCv.Models.Entity
+@model List<tbl_SocialMedia>
+
+
+<div class="social-icons">
+@foreach (var item in Model)
+{
+        <a class="social-icon" href="@item.Link"><i class="@item.Name"></i></a>
+}
+    </div>
+<script src="https://kit.fontawesome.com/2dcd184ce8.js" crossorigin="anonymous"></script>

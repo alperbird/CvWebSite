@@ -1,0 +1,114 @@
+﻿@using MvcCv.Models.Entity
+@model List<tbl_SocialMedia>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{string durum = "";}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Skill List</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <button class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal1">Add New Social Media</button>
+                                <br />
+                                <br />
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">ID</th>
+                                            <th>Name</th>
+                                            <th>Link</th>
+                                            <th>Status</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var x in Model)
+                                        {
+                                            if (x.Status == true)
+                                            {
+                                                durum = "Aktif";
+                                            }
+                                            else
+                                            {
+                                                durum = "Pasif";
+                                            }
+                                            <tr>
+                                                <td>@x.Id</td>
+                                                <td>@x.Name</td>
+                                                <td>@x.Link</td>
+                                                <td>@durum</td>
+                                                <td>
+                                                    <a class="btn btn-outline-warning btn-sm" href="/SocialMedia/Update/@x.Id">
+                                                        <i class="fas fa-pencil-alt"></i> Update and Active
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-outline-danger btn-sm" href="/SocialMedia/Delete/@x.Id">
+                                                        <i class="fas fa-trash"></i> Passive
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+        <div class="modal" id="Modal1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Add New Social Media Account</h2>
+                    </div>
+                    <form method="post" action="/SocialMedia/Add">
+                        <div class="modal-body">
+                            <label>Social Media Icon: </label>
+                            <input type="text" name="Name" class="form-control" />
+
+                            <br />
+
+                            <label>Social Media Link: </label>
+                            <input type="text" name="Link" class="form-control" />
+
+                            <br />
+                            <button class="btn btn-outline-info">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <script src="https://kit.fontawesome.com/2dcd184ce8.js" crossorigin="anonymous"></script>
+</body>
+</html>
+
